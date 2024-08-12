@@ -1,36 +1,34 @@
-const path = require('path');
-const process = require('process');
-const isProd = process.env.NODE_ENV === 'production';
-const nodeEnv = isProd ? 'production' : 'development';
+const path = require("path");
+const process = require("process");
+const isProd = process.env.NODE_ENV === "production";
+const nodeEnv = isProd ? "production" : "development";
 
 const conf = {
   mode: nodeEnv,
 
   entry: {
-    bundle: './src/client/index.js',
-    polyfills: './src/client/polyfills.js'
+    bundle: "./src/client/index.js",
+    polyfills: "./src/client/polyfills.js",
   },
 
   output: {
-    filename: '[name].js'
+    filename: "[name].js",
   },
 
-  devtool: !isProd ? 'inline-source-map' : false,
+  devtool: !isProd ? "inline-source-map" : false,
 
   module: {
     rules: [
       {
-        loader: 'babel-loader',
+        loader: "babel-loader",
         test: /\.js$/,
-        include: [
-          path.resolve(__dirname, 'src'),
-        ],
+        include: [path.resolve(__dirname, "src")],
         options: {
-          cacheDirectory: true
-        }
-      }
-    ]
-  }
+          cacheDirectory: true,
+        },
+      },
+    ],
+  },
 };
 
 module.exports = conf;

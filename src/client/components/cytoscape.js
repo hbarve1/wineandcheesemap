@@ -1,23 +1,16 @@
-import { h, Component } from 'preact';
+import { h } from "preact";
+import { useEffect } from "preact/hooks";
 
-class CytoscapeComponent extends Component {
-  constructor(props){
-    super(props);
-  }
+const CytoscapeComponent = ({ cy, controller }) => {
 
-  render(){
-    return h('div', { id: 'cy' });    
-  }
-
-  componentDidMount(){
-    const { cy, controller } = this.props;
-    const container = document.getElementById('cy');
+  useEffect(() => {
+    const container = document.getElementById("cy");
 
     cy.mount(container);
     cy.fit(10);
 
-    cy.on('tap', this.onTap = e => {
-      if( e.target === cy ){
+    const onTap = (e) => {
+      if (e.target === cy) {
         controller.unhighlight();
         controller.hideInfo();
         controller.closeMenu();
@@ -26,15 +19,17 @@ class CytoscapeComponent extends Component {
         controller.showInfo(e.target);
         controller.closeMenu();
       }
-    });
-  }
+    };
 
-  componentWillUnmount(){
-    const { cy } = this.props;
+    cy.on("tap", onTap);
 
-    cy.removeListener('tap', this.onTap);
-  }
-}
+    return () => {
+      cy.removeListener("tap", onTap);
+    };
+  }, [cy, controller]);
+
+  return <div id="cy" />;
+};
 
 export default CytoscapeComponent;
 export { CytoscapeComponent };

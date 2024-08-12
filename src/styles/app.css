@@ -1,7 +1,10 @@
 html,
 body,
 .app {
-  font-family: helvetica neue, helvetica, sans-serif;
+  font-family:
+    helvetica neue,
+    helvetica,
+    sans-serif;
   margin: 0;
   padding: 0;
   background: var(--bodyBgColor);
@@ -45,7 +48,7 @@ body,
 .loader-icon {
   width: 6em;
   height: 6em;
-  background-image: url('./images/icon.png');
+  background-image: url("./images/icon.png");
   background-size: contain;
   background-repeat: no-repeat;
 }
